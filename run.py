@@ -33,7 +33,8 @@ while True:
 
 	elif user_input == '3':
 		print('Você escolheu cancelar uma consulta')
-		break
+		cancelappointment(registered)
+		continue
 
 	elif user_input == '0':
 		break
