@@ -2,6 +2,7 @@ from .class_patient import *
 import datetime
 from datetime import datetime
 import time
+import pickle
 
 #Registra o usuário
 def register(registered):
@@ -28,6 +29,7 @@ def register(registered):
 		else: #Se o número não é duplicado cria o usuário
 			nowregistering = patient(user_input1, user_input2)
 			registered.append(nowregistering)
+			write(registered)
 			print('Paciente cadastrado com sucesso!')
 
 #Lista todos os usuários cadastrados
@@ -69,6 +71,7 @@ def setappointment(registered):
 	else: #Cria a consulta
 		registered[user_input1].timestamp = timestamp
 		registered[user_input1].specialty = specialty
+		write(registered)
 		print('Você agendou uma consulta para o paciente: ', registered[user_input1].name, ' na data: ', datetime.fromtimestamp(registered[user_input1].timestamp))
 
 #Cancela uma consulta
@@ -95,9 +98,14 @@ def cancelappointment(registered):
 			if registered[user_input1].timestamp != '':
 				registered[user_input1].timestamp = ''
 				registered[user_input1].specialty = ''
+				write(registered)
 			else:
 				print('O número do paciente digitado não possui uma consulta agendada')
 				return
 	except:
 		print('O paciente escolhido não existe')
 		return
+
+def write(registered):
+	with open('database.pkl', 'wb') as file:
+		pickle.dump(registered, file)

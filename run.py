@@ -14,12 +14,16 @@ from modules.function_register import *
 import time
 import datetime
 from datetime import datetime
+import pickle
 
-registered = []
+try:
+	with open('database.pkl', 'rb') as file:
+		registered = pickle.load(file)
+except:
+	registered = []
 
 while True:
-	user_input = input(
-		'Olá, seja bem vindo!\nEscolha a operação desejada:\n1) Cadastrar paciente\n2) Marcar consulta\n3) Cancelar consulta\n0) Sair\n')
+	user_input = input('Olá, seja bem vindo!\nEscolha a operação desejada:\n1) Cadastrar paciente\n2) Marcar consulta\n3) Cancelar consulta\n0) Sair\n')
 
 	if user_input == '1':
 		register(registered)
